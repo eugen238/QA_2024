@@ -16,10 +16,11 @@ async function run() {
     await searchButton.click();
 
     await driver.sleep(2000);
-    await driver.get('https://5element.by/cart/');
-    await driver.sleep(3000);
+    const linkElement = await driver.findElement(By.xpath('//*[@id="app"]/div[11]/div/div[3]/div[2]/a[2]')); // Здесь вы можете использовать нужный вам селектор для поиска элемента <a>
+    await linkElement.click();
+    await driver.wait(until.urlContains('https://5element.by/cart'), 5000);
+
     
-    //await driver.findElement(By.className('shopping-promo-submit btn')).click();
     const text = await driver.findElement(By.css('div[data-product_id="798760"]')).getText();
     if(text.includes('Игровой ноутбук Asus TUF Gaming A15 FA506NF-HN018'))
     {
